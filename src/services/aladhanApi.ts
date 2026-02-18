@@ -12,7 +12,7 @@ export const CALC_METHODS: CalcMethod[] = [
   { id: "1",  label: "Karachi",               region: "Pakistan, India",         params: "method=1" },
   { id: "13", label: "Diyanet (Turkey)",       region: "Turkey, Balkans",         params: "method=13" },
   { id: "14", label: "Russia / CIS",           region: "Russia, Central Asia",    params: "method=14" },
-  { id: "uz", label: "Uzbekistan (15°/15°)",   region: "Uzbekistan",              params: "method=99&methodSettings=15,null,15" },
+  { id: "uz", label: "Uzbekistan (15°/15°)",   region: "Uzbekistan",              params: "method=99&methodSettings=15,null,15&tune=0,0,0,0,0,4,0,0,0" },
   { id: "9",  label: "Kuwait",                 region: "Kuwait",                  params: "method=9" },
   { id: "10", label: "Qatar",                  region: "Qatar",                   params: "method=10" },
   { id: "8",  label: "Gulf Region",            region: "UAE, Oman, Bahrain",      params: "method=8" },
