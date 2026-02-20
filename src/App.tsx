@@ -6,12 +6,14 @@ import { Countdown } from "./components/Countdown";
 import { LocationPicker } from "./components/LocationPicker";
 import { IftarMessage } from "./components/IftarMessage";
 import { MethodPicker } from "./components/MethodPicker";
+import { ThemeToggle } from "./components/ThemeToggle";
 import {
   DEFAULT_METHOD,
   getMethodForCountry,
   loadSavedMethod,
   persistMethod,
 } from "./services/aladhanApi";
+import { useTheme } from "./hooks/useTheme";
 import type { Phase, CalcMethod } from "./types";
 
 const IFTAR_MESSAGE_DURATION = 5000;
@@ -24,6 +26,7 @@ function getPhase(todayFajr: Date, maghrib: Date): Phase {
 }
 
 function App() {
+  const { theme, toggle: toggleTheme } = useTheme();
   const { location, status, setManualLocation } = useLocation();
   const [method, setMethod] = useState<CalcMethod>(
     () => loadSavedMethod() ?? DEFAULT_METHOD
@@ -95,7 +98,9 @@ function App() {
   const countdown = useCountdown(target);
 
   const isFasting = phase === "fasting";
-  const bgClass = isFasting ? "bg-dark" : "bg-[#0a0f1a]";
+  const bgClass = isFasting
+    ? "bg-amber-50 dark:bg-dark"
+    : "bg-slate-50 dark:bg-[#0a0f1a]";
 
   const progress = (() => {
     if (!data) return null;
@@ -122,7 +127,8 @@ function App() {
 
   if (status === "loading") {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-dark p-8 font-mono">
+      <div className="flex min-h-screen items-center justify-center bg-amber-50 p-8 font-mono dark:bg-dark">
+        <ThemeToggle theme={theme} onToggle={toggleTheme} />
         <p className="text-lg text-neutral-500">Detecting location...</p>
       </div>
     );
@@ -130,7 +136,8 @@ function App() {
 
   if (status === "denied" && !location) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-dark p-8 font-mono">
+      <div className="flex min-h-screen items-center justify-center bg-amber-50 p-8 font-mono dark:bg-dark">
+        <ThemeToggle theme={theme} onToggle={toggleTheme} />
         <LocationPicker onSelect={handleLocationChange} />
       </div>
     );
@@ -138,7 +145,8 @@ function App() {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-dark p-8 font-mono">
+      <div className="flex min-h-screen items-center justify-center bg-amber-50 p-8 font-mono dark:bg-dark">
+        <ThemeToggle theme={theme} onToggle={toggleTheme} />
         <p className="text-lg text-neutral-500">Loading prayer times...</p>
       </div>
     );
@@ -146,8 +154,9 @@ function App() {
 
   if (error) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-dark p-8 font-mono">
-        <p className="text-lg text-red-400">{error}</p>
+      <div className="flex min-h-screen items-center justify-center bg-amber-50 p-8 font-mono dark:bg-dark">
+        <ThemeToggle theme={theme} onToggle={toggleTheme} />
+        <p className="text-lg text-red-600 dark:text-red-400">{error}</p>
       </div>
     );
   }
@@ -156,13 +165,14 @@ function App() {
 
   return (
     <div className={`flex min-h-screen flex-col items-center justify-center p-8 font-mono transition-colors duration-700 ${bgClass}`}>
+      <ThemeToggle theme={theme} onToggle={toggleTheme} />
       <header className="mb-12 text-center">
         {editingLocation ? (
           <LocationPicker onSelect={handleLocationChange} onCancel={() => setEditingLocation(false)} />
         ) : (
           <button
             onClick={() => setEditingLocation(true)}
-            className="group mb-1 inline-flex cursor-pointer items-center gap-1.5 border-b border-dashed border-neutral-700 text-base text-neutral-500 transition-colors hover:border-gold hover:text-gold"
+            className="group mb-1 inline-flex cursor-pointer items-center gap-1.5 border-b border-dashed border-neutral-300 text-base text-neutral-500 transition-colors hover:border-gold hover:text-gold dark:border-neutral-700"
           >
             {location?.label}
             <svg

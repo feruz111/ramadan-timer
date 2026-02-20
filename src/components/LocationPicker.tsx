@@ -93,7 +93,7 @@ export function LocationPicker({ onSelect, onCancel }: Props) {
           <button
             type="button"
             onClick={onCancel}
-            className="cursor-pointer text-sm text-neutral-500 transition-colors hover:text-neutral-300"
+            className="cursor-pointer text-sm text-neutral-500 transition-colors hover:text-neutral-700 dark:hover:text-neutral-300"
           >
             Cancel
           </button>
@@ -106,7 +106,7 @@ export function LocationPicker({ onSelect, onCancel }: Props) {
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="e.g. Istanbul, Dubai, Cairo"
-          className="w-full rounded-lg border border-neutral-700 bg-neutral-900 px-4 py-3 text-base text-white outline-none placeholder:text-neutral-600 transition-colors focus:border-gold"
+          className="w-full rounded-lg border border-neutral-300 bg-white px-4 py-3 text-base text-neutral-900 outline-none placeholder:text-neutral-400 transition-colors focus:border-gold dark:border-neutral-700 dark:bg-neutral-900 dark:text-white dark:placeholder:text-neutral-600"
           autoFocus
         />
         {loading && (
@@ -115,7 +115,7 @@ export function LocationPicker({ onSelect, onCancel }: Props) {
           </span>
         )}
         {results.length > 0 && (
-          <ul className="absolute left-0 right-0 z-10 mt-1 overflow-hidden rounded-lg border border-neutral-700 bg-neutral-900 text-left">
+          <ul className="absolute left-0 right-0 z-10 mt-1 overflow-hidden rounded-lg border border-neutral-300 bg-white text-left dark:border-neutral-700 dark:bg-neutral-900">
             {results.map((r, i) => (
               <li key={`${r.latitude}-${r.longitude}`}>
                 <button
@@ -123,8 +123,8 @@ export function LocationPicker({ onSelect, onCancel }: Props) {
                   onClick={() => pick(r)}
                   className={`block w-full cursor-pointer px-4 py-2.5 text-left text-sm transition-colors ${
                     i === activeIndex
-                      ? "bg-neutral-800 text-gold"
-                      : "text-neutral-300 hover:bg-neutral-800 hover:text-white"
+                      ? "bg-neutral-100 text-gold dark:bg-neutral-800"
+                      : "text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-white"
                   }`}
                 >
                   {formatLabel(r)}

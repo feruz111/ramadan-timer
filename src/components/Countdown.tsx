@@ -11,7 +11,7 @@ interface Props {
 export function Countdown({ hours, minutes, seconds, label, progress }: Props) {
   return (
     <div className="text-center">
-      <div className="flex items-center justify-center gap-[0.1em] text-[clamp(3rem,12vw,7rem)] font-bold tracking-wider text-white tabular-nums">
+      <div className="flex items-center justify-center gap-[0.1em] text-[clamp(3rem,12vw,7rem)] font-bold tracking-wider text-neutral-900 tabular-nums dark:text-white">
         <span className="inline-block min-w-[2ch]">{padTwo(hours)}</span>
         <span className="text-gold animate-blink">:</span>
         <span className="inline-block min-w-[2ch]">{padTwo(minutes)}</span>
@@ -20,7 +20,7 @@ export function Countdown({ hours, minutes, seconds, label, progress }: Props) {
       </div>
       {progress !== null && (
         <div className="mx-auto mt-6 w-[min(80vw,28rem)]">
-          <div className="h-1.5 overflow-hidden rounded-full bg-neutral-800">
+          <div className="h-1.5 overflow-hidden rounded-full bg-neutral-200 dark:bg-neutral-800">
             <div
               className="h-full rounded-full bg-gold transition-[width] duration-1000 ease-linear"
               style={{ width: `${(progress * 100).toFixed(1)}%` }}

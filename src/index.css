@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@variant dark (&:is(.dark, .dark *));
+
 @theme {
   --font-mono: "SF Mono", "Fira Code", "JetBrains Mono", monospace;
   --color-gold: #d4a843;
